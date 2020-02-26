@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\CashMachine\Model;
 
@@ -25,7 +27,7 @@ final class ChangeEnvelope
                         'Expecting that %s $change parameter as a collection of %s object. Got %s at index %s.',
                         __METHOD__,
                         Change::class,
-                        is_object($item) ? get_class($item) : gettype($item),
+                        get_class($item),
                         $idx
                     )
                 );
@@ -36,7 +38,7 @@ final class ChangeEnvelope
                 throw new InvalidArgumentException(
                     sprintf(
                         'Expecting that %s $change parameter contains collection of change with unique amounts. '
-                        .'Already registered %s at index %s but trying to registered at %s.',
+                        . 'Already registered %s at index %s but trying to registered at %s.',
                         __METHOD__,
                         $amounts[$amountKey],
                         $amountKey,
