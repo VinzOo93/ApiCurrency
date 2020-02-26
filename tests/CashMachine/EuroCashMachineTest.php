@@ -9,7 +9,7 @@ class EuroCashMachineTest extends CashMachineTestCase
 {
     public function testCurrency(): void
     {
-        $currency = (new EuroCashMachine())->currency(-10);
+        $currency = (new EuroCashMachine())->currency();
         self::assertSame('EUR', $currency->code());
         self::assertSame('€', $currency->symbol());
     }

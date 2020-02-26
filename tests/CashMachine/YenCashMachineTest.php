@@ -9,7 +9,7 @@ class YenCashMachineTest extends CashMachineTestCase
 {
     public function testCurrency(): void
     {
-        $currency = (new YenCashMachine())->currency(-10);
+        $currency = (new YenCashMachine())->currency();
         self::assertSame('JPY', $currency->code());
         self::assertSame('¥', $currency->symbol());
     }
