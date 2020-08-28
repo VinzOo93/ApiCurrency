@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\CashMachine;
 
 use App\CashMachine\EuroCashMachine;
+use App\CashMachine\Exception\CannotChange;
 use Generator;
 
 class EuroCashMachineTest extends CashMachineTestCase
@@ -16,19 +17,17 @@ class EuroCashMachineTest extends CashMachineTestCase
         self::assertSame('€', $currency->symbol());
     }
 
-    /**
-     * @expectedException \App\CashMachine\Exception\CannotChange
-     */
     public function testChangeNegativeAmount(): void
     {
+        $this->expectException(CannotChange::class);
+
         (new EuroCashMachine())->change(-10);
     }
 
-    /**
-     * @expectedException \App\CashMachine\Exception\CannotChange
-     */
     public function testChangeImpossibleAmount(): void
     {
+        $this->expectException(CannotChange::class);
+
         (new EuroCashMachine())->change(0.005);
     }
 

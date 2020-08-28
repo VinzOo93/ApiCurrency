@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\CashMachine;
 
+use App\CashMachine\Exception\CannotChange;
 use App\CashMachine\YenCashMachine;
 use Generator;
 
@@ -16,19 +17,17 @@ class YenCashMachineTest extends CashMachineTestCase
         self::assertSame('¥', $currency->symbol());
     }
 
-    /**
-     * @expectedException \App\CashMachine\Exception\CannotChange
-     */
     public function testChangeNegativeAmount(): void
     {
+        $this->expectException(CannotChange::class);
+
         (new YenCashMachine())->change(-10);
     }
 
-    /**
-     * @expectedException \App\CashMachine\Exception\CannotChange
-     */
     public function testChangeImpossibleAmount(): void
     {
+        $this->expectException(CannotChange::class);
+
         (new YenCashMachine())->change(0.5);
     }
 
