@@ -1,0 +1,27 @@
+stages:
+  - Tests
+
+PHP CodeSniffer:
+  stage: Tests
+  script:
+    - composer install --no-progress --no-interaction --no-suggest
+    - vendor/bin/phpcs
+
+PHP Static Analysis Tool:
+  stage: Tests
+  script:
+    - composer install --no-progress --no-interaction --no-suggest
+    - vendor/bin/phpstan analyse
+
+YAML Linter:
+  stage: Tests
+  script:
+    - composer install --no-progress --no-interaction --no-suggest
+    - bin/console lint:yaml config/ --parse-tags
+
+PHP Unit Tests:
+  stage: Tests
+  coverage: /^\s*Lines:\s*\d+.\d+\%/
+  script:
+    - composer install --no-progress --no-interaction --no-suggest
+    - bin/phpunit --coverage-text --colors=never
