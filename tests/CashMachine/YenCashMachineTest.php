@@ -55,7 +55,7 @@ class YenCashMachineTest extends CashMachineTestCase
                 [1000, 1],
                 [500, 1],
                 [100, 3],
-                [20, 2],
+                [10, 4],
                 [1, 3],
             ],
         ];
