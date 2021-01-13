@@ -2,23 +2,23 @@
     "type": "project",
     "license": "proprietary",
     "require": {
-        "php": "^7.3.0",
+        "php": "^7.4.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",
         "sensio/framework-extra-bundle": "^5.6",
-        "symfony/console": "^5.1",
-        "symfony/dotenv": "^5.1",
-        "symfony/flex": "^1.10",
-        "symfony/framework-bundle": "^5.1",
-        "symfony/yaml": "^5.1"
+        "symfony/console": "^5.2",
+        "symfony/dotenv": "^5.2",
+        "symfony/flex": "^1.11",
+        "symfony/framework-bundle": "^5.2",
+        "symfony/yaml": "^5.2"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12",
         "squizlabs/php_codesniffer": "^3.5",
-        "symfony/browser-kit": "^5.1",
-        "symfony/css-selector": "^5.1",
-        "symfony/phpunit-bridge": "^5.1"
+        "symfony/browser-kit": "^5.2",
+        "symfony/css-selector": "^5.2",
+        "symfony/phpunit-bridge": "^5.2"
     },
     "config": {
         "preferred-install": {
@@ -40,6 +40,7 @@
         "paragonie/random_compat": "2.*",
         "symfony/polyfill-ctype": "*",
         "symfony/polyfill-iconv": "*",
+        "symfony/polyfill-php74": "*",
         "symfony/polyfill-php73": "*",
         "symfony/polyfill-php72": "*",
         "symfony/polyfill-php71": "*",
@@ -64,7 +65,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "5.1.*"
+            "require": "5.2.*"
         }
     }
 }
