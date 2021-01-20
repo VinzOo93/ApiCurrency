@@ -21,7 +21,6 @@ YAML Linter:
 
 PHP Unit Tests:
   stage: Tests
-  coverage: /^\s*Lines:\s*\d+.\d+\%/
   script:
     - composer install --no-progress --no-interaction --no-suggest
-    - bin/phpunit --coverage-text --colors=never
+    - bin/phpunit
