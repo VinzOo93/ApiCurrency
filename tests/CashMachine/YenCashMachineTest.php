@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace App\Tests\CashMachine;
 
 use App\CashMachine\Exception\CannotChange;
-use App\CashMachine\YenCashMachine;
 use Generator;
 
 class YenCashMachineTest extends CashMachineTestCase
 {
     public function testCurrency(): void
     {
-        $currency = (new YenCashMachine())->currency();
+        $machine = $this->getCashMachine('JPY');
+        $currency = $machine->currency();
         self::assertSame('JPY', $currency->code());
         self::assertSame('¥', $currency->symbol());
     }
@@ -21,14 +21,14 @@ class YenCashMachineTest extends CashMachineTestCase
     {
         $this->expectException(CannotChange::class);
 
-        (new YenCashMachine())->change(-10);
+        $this->getCashMachine('JPY')->change(-10);
     }
 
     public function testChangeImpossibleAmount(): void
     {
         $this->expectException(CannotChange::class);
 
-        (new YenCashMachine())->change(0.5);
+        $this->getCashMachine('JPY')->change(0.5);
     }
 
     /**
@@ -36,7 +36,7 @@ class YenCashMachineTest extends CashMachineTestCase
      */
     public function testChangeValidAmount(float $amount, array $expectations): void
     {
-        $envelope = (new YenCashMachine())->change($amount);
+        $envelope = $this->getCashMachine('JPY')->change($amount);
         self::assertEnvelopeContent($expectations, $envelope);
     }
 

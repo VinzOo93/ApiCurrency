@@ -4,12 +4,22 @@ declare(strict_types=1);
 
 namespace App\Tests\CashMachine;
 
+use App\CashMachine\CashMachine;
+use App\CashMachine\CashMachineRegistry;
+use App\CashMachine\Exception\NotRegistered;
 use App\CashMachine\Model\Change;
 use App\CashMachine\Model\ChangeEnvelope;
-use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\ExpectationFailedException;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
-class CashMachineTestCase extends TestCase
+class CashMachineTestCase extends KernelTestCase
 {
+    public function setUp(): void
+    {
+        self::bootKernel();
+    }
+
     public static function assertEnvelopeContent(array $expectations, ChangeEnvelope $envelope): void
     {
         self::assertCount(count($expectations), $content = $envelope->content());
@@ -29,5 +39,31 @@ class CashMachineTestCase extends TestCase
         }
 
         return null;
+    }
+
+    protected function getCashMachine(string $currency): CashMachine
+    {
+        try {
+            /** @var CashMachineRegistry $registry */
+            $registry = self::$container->get(CashMachineRegistry::class);
+        } catch (ServiceNotFoundException $exception) {
+            throw new ExpectationFailedException(
+                'Unable to get cash machine registry from container.',
+                null,
+                $exception
+            );
+        }
+
+        self::assertInstanceOf(CashMachineRegistry::class, $registry);
+
+        try {
+            return $registry->get($currency);
+        } catch (NotRegistered $exception) {
+            throw new ExpectationFailedException(
+                'Unable to get ' . $currency . ' cash machine from registry.',
+                null,
+                $exception
+            );
+        }
     }
 }
