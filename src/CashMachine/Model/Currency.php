@@ -10,13 +10,13 @@ final class Currency
      * The currency ISO code
      * @var string
      */
-    private $code;
+    private string $code;
 
     /**
      * The currency symbol
      * @var string
      */
-    private $symbol;
+    private string $symbol;
 
     /**
      * @param string $code   The currency ISO code

@@ -12,7 +12,7 @@ final class ChangeEnvelope
      * The envelope content
      * @var Change[]
      */
-    private $change;
+    private array $change;
 
     /**
      * @param Change[] $change The envelope content

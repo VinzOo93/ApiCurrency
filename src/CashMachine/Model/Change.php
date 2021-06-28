@@ -10,13 +10,13 @@ final class Change
      * The change amount
      * @var float
      */
-    private $amount;
+    private float $amount;
 
     /**
      * The change quantity
      * @var int
      */
-    private $quantity;
+    private int $quantity;
 
     /**
      * @param float $amount   The change amount
@@ -46,15 +46,5 @@ final class Change
     public function quantity(): int
     {
         return $this->quantity;
-    }
-
-    /**
-     * Increment this change quantity
-     *
-     * @param int $increment The increment
-     */
-    public function increment(int $increment = 1): void
-    {
-        $this->quantity += $increment;
     }
 }
