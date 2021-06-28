@@ -19,7 +19,7 @@ final class CashMachineRegistryTest extends KernelTestCase
     {
         try {
             /** @var CashMachineRegistry $registry */
-            $registry = self::$container->get(CashMachineRegistry::class);
+            $registry = self::getContainer()->get(CashMachineRegistry::class);
         } catch (ServiceNotFoundException $exception) {
             throw new ExpectationFailedException(
                 'Unable to get cash machine registry from container.',
