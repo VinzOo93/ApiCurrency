@@ -1,6 +1,9 @@
 stages:
   - Tests
 
+default:
+  image: edbizarro/gitlab-ci-pipeline-php:8.0-alpine
+
 PHP CodeSniffer:
   stage: Tests
   script:
