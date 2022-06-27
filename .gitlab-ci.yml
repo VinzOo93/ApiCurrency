@@ -2,7 +2,7 @@ stages:
   - Tests
 
 default:
-  image: edbizarro/gitlab-ci-pipeline-php:8.0-alpine
+  image: ledup/php:8.1
 
 PHP CodeSniffer:
   stage: Tests
