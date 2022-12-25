@@ -1,20 +1,37 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\CashMachine;
 
-use App\CashMachine\Exception\NotRegistered;
+use Symfony\Component\DependencyInjection\Container;
+use App\CashMachine\Model\Currency;
+use App\CashMachine\Service\CashMachineGenerator;
+use App\Interface\CashMachineInterface;
+use App\Interface\CashMachineRegistryInterface;
 
-interface CashMachineRegistry
+class CashMachineRegistry implements CashMachineRegistryInterface
 {
+    private CashMachineGenerator $cacheMachineGenerator;
+    private Currency $currency;
+
     /**
-     * Get a cash machine from this registry.
-     *
-     * @param string $currency The currency code
-     *
-     * @return CashMachine The cash machine object
-     * @throws NotRegistered If this cash machine name have not been registered yet.
+     * @param CashMachineGenerator $cacheMachineGenerator
+     * @param Currency $currency
      */
-    public function get(string $currency): CashMachine;
+    public function __construct(CashMachineGenerator $cacheMachineGenerator, Currency $currency)
+    {
+        $this->cacheMachineGenerator = $cacheMachineGenerator;
+        $this->currency = $currency;
+    }
+
+
+    /**
+     * @throws \Exception
+     */
+    public function get(string $currency): CashMachineInterface
+    {
+        $this->currency = $this->cacheMachineGenerator->getCashMachinesCurrency($currency);
+        $this->cacheMachineGenerator->getCashMachines($this->currency);
+
+        return $this->cacheMachineGenerator->getCashMachines($this->currency);
+    }
 }

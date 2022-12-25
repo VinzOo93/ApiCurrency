@@ -33,7 +33,7 @@ final class Currency
      *
      * @return string The currency code
      */
-    public function code(): string
+    public function getCode(): string
     {
         return $this->code;
     }
@@ -43,7 +43,7 @@ final class Currency
      *
      * @return string The currency symbol
      */
-    public function symbol(): string
+    public function getSymbol(): string
     {
         return $this->symbol;
     }

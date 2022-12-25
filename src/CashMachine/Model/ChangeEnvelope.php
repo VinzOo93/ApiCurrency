@@ -33,7 +33,7 @@ final class ChangeEnvelope
                 );
             }
 
-            $amountKey = number_format($item->amount(), 2);
+            $amountKey = number_format($item->getAmount(), 2);
             if (array_key_exists($amountKey, $amounts)) {
                 throw new InvalidArgumentException(
                     sprintf(
@@ -58,7 +58,7 @@ final class ChangeEnvelope
      *
      * @return Change[] The content of the envelope
      */
-    public function content(): array
+    public function getContent(): array
     {
         return $this->change;
     }
@@ -70,7 +70,7 @@ final class ChangeEnvelope
      *
      * @return ChangeEnvelope The new envelope
      */
-    public function add(Change $change): self
+    public function addChange(Change $change): self
     {
         return new self(array_merge($this->change, [$change]));
     }

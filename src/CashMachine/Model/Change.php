@@ -33,7 +33,7 @@ final class Change
      *
      * @return float The change amount
      */
-    public function amount(): float
+    public function getAmount(): float
     {
         return $this->amount;
     }
@@ -43,7 +43,7 @@ final class Change
      *
      * @return int The change quantity
      */
-    public function quantity(): int
+    public function getQuantity(): int
     {
         return $this->quantity;
     }

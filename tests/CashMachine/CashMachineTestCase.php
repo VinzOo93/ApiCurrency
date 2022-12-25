@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\CashMachine;
 
-use App\CashMachine\CashMachine;
+use App\CashMachine\CashMac;
 use App\CashMachine\CashMachineRegistry;
 use App\CashMachine\Exception\NotRegistered;
 use App\CashMachine\Model\Change;
