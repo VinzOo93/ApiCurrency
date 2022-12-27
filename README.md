@@ -1,38 +1,20 @@
-## Test technique
+# ⚙️ Installation
+____________________
+#### _Requirement
+(you can use this command "composer check" for verify):
 
+php 8.1+
+composer > 2.0.0
 
-## Objectif
+#### _For install dependencies :
 
-Ecrire une **API REST JSON** qui rend la monnaie à un client.
+<code> $ composer install </code>
 
-La monnaie rendue doit **toujours être optimale** (par exemple, 1 x 10 au lieu de 5 x 2).
+#### After that, you can use this command to run this Api :
 
-Le service doit être capable de gérer **plusieurs monnaies différentes**, pour l'instant **Euro** & **Yen**.
+$ symfony serve
 
+##### You can access get your change by this url for example : http://localhost:8000/api/EUR/change/728.93.
 
-## Résultat attendu
-
-Vous devrez **écrire deux classes** implémentant l'interface `App\CashMachine\CashMachine` :
-- `App\CashMachine\EuroCashMachine` rendu en [Euro](https://fr.wikipedia.org/wiki/Euro)
-- `App\CashMachine\YenCashMachine` rendu en [Yen](https://fr.wikipedia.org/wiki/Yen)
-
-Il faudra également **écrire une classe** implémentant l'interface `App\CashMachine\CashMachineRegistry`.
-
-Enfin, vous devrez **écrire un controller** pour implémenter l'API.
-
-
-## Evaluation
-
-Le projet est livré avec des tests unitaires et fonctionnel.
-Ces tests peuvent servir de spécifications si vous doutez du comportement attendu, 
-puisque ce sont eux qui valideront le code que vous aurez produit.
-
-**ATTENTION :** Les tests ne doivent pas avoir été modifiés.
-
-
-## Scripts
-
-- **Installer le projet :** installer les dépendances `Composer` suffit
-- **Jouer les tests unitaires et fonctionnels :** une fois le projet installé, c'est `PHPUnit` qui les joue
-
-**NOTE :** Les commandes ne vous sont volontairement pas données, nous espérons que vous trouverez par vous même.
+#### You can choose 2 currencies JPY and EUR : 
+http://localhost:8000/api/{symbol}/change/{amount}

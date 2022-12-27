@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\CashMachine;
 
-use App\CashMachine\Exception\CannotChange;
+use App\CashMachine\Exception\CannotChangeException;
 use Generator;
 
 class EuroCashMachineTest extends CashMachineTestCase
@@ -12,23 +12,23 @@ class EuroCashMachineTest extends CashMachineTestCase
     public function testCurrency(): void
     {
         $machine = $this->getCashMachine('EUR');
-        $currency = $machine->currency();
-        self::assertSame('EUR', $currency->code());
-        self::assertSame('€', $currency->symbol());
+        $currency = $machine->getCurrency();
+        self::assertSame('EUR', $currency->getCode());
+        self::assertSame('€', $currency->getSymbol());
     }
 
     public function testChangeNegativeAmount(): void
     {
-        $this->expectException(CannotChange::class);
+        $this->expectException(CannotChangeException::class);
 
-        $this->getCashMachine('EUR')->change(-10);
+        $this->getCashMachine('EUR')->getChangeEnveloppe(-10);
     }
 
     public function testChangeImpossibleAmount(): void
     {
-        $this->expectException(CannotChange::class);
+        $this->expectException(CannotChangeException::class);
 
-        $this->getCashMachine('EUR')->change(0.005);
+        $this->getCashMachine('EUR')->getChangeEnveloppe(0.005);
     }
 
     /**
@@ -36,7 +36,7 @@ class EuroCashMachineTest extends CashMachineTestCase
      */
     public function testChangeValidAmount(float $amount, array $expectations): void
     {
-        $envelope = $this->getCashMachine('EUR')->change($amount);
+        $envelope = $this->getCashMachine('EUR')->getChangeEnveloppe($amount);
         self::assertEnvelopeContent($expectations, $envelope);
     }
 

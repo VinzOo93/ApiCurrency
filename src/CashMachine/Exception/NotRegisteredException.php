@@ -9,6 +9,6 @@ use InvalidArgumentException;
 /**
  * This exception will occurs whenever a not registered cash machine is fetched from the registry.
  */
-final class NotRegistered extends InvalidArgumentException
+final class NotRegisteredException extends InvalidArgumentException
 {
 }

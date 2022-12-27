@@ -9,6 +9,6 @@ use InvalidArgumentException;
 /**
  * This exception will occurs whenever a cash machine fails to change certain amount.
  */
-final class CannotChange extends InvalidArgumentException
+final class CannotChangeException extends InvalidArgumentException
 {
 }

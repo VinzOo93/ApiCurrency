@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Tests\CashMachine;
 
-use App\CashMachine\CashMac;
+use App\Interface\CashMachineInterface;
 use App\CashMachine\CashMachineRegistry;
-use App\CashMachine\Exception\NotRegistered;
+use App\CashMachine\Exception\NotRegisteredException;
 use App\CashMachine\Model\Change;
 use App\CashMachine\Model\ChangeEnvelope;
 use PHPUnit\Framework\ExpectationFailedException;
@@ -22,10 +22,10 @@ class CashMachineTestCase extends KernelTestCase
 
     public static function assertEnvelopeContent(array $expectations, ChangeEnvelope $envelope): void
     {
-        self::assertCount(count($expectations), $content = $envelope->content());
+        self::assertCount(count($expectations), $content = $envelope->getContent());
         foreach ($expectations as [$amount, $quantity]) {
             self::assertNotNull($change = self::findChange($content, $amount));
-            self::assertSame($quantity, $change->quantity());
+            self::assertSame($quantity, $change->getQuantity());
         }
     }
 
@@ -33,7 +33,7 @@ class CashMachineTestCase extends KernelTestCase
     {
         /** @var Change $change */
         foreach ($envelopeContent as $change) {
-            if ($change->amount() == $amount) {
+            if ($change->getAmount() == $amount) {
                 return $change;
             }
         }
@@ -41,7 +41,7 @@ class CashMachineTestCase extends KernelTestCase
         return null;
     }
 
-    protected function getCashMachine(string $currency): CashMachine
+    protected function getCashMachine(string $currency): CashMachineInterface
     {
         try {
             /** @var CashMachineRegistry $registry */
@@ -58,7 +58,7 @@ class CashMachineTestCase extends KernelTestCase
 
         try {
             return $registry->get($currency);
-        } catch (NotRegistered $exception) {
+        } catch (NotRegisteredException $exception) {
             throw new ExpectationFailedException(
                 'Unable to get ' . $currency . ' cash machine from registry.',
                 null,

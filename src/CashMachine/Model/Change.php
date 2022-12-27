@@ -22,7 +22,7 @@ final class Change
      * @param float $amount   The change amount
      * @param int   $quantity The change quantity
      */
-    public function __construct(float $amount, int $quantity = 0)
+    public function __construct(float $amount = 0, int $quantity = 0)
     {
         $this->amount = $amount;
         $this->quantity = $quantity;

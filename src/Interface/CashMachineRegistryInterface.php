@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Interface;
 
-use App\CashMachine\Exception\NotRegistered;
+use App\CashMachine\Exception\NotRegisteredException;
 
 interface CashMachineRegistryInterface
 {
@@ -14,7 +14,7 @@ interface CashMachineRegistryInterface
      * @param string $currency The currency code
      *
      * @return CashMachineInterface The cash machine object
-     * @throws NotRegistered If this cash machine name have not been registered yet.
+     * @throws NotRegisteredException If this cash machine name have not been registered yet.
      */
     public function get(string $currency): CashMachineInterface;
 }

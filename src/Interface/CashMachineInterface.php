@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Interface;
 
-use App\CashMachine\Exception\CannotChange;
+use App\CashMachine\Exception\CannotChangeException;
 use App\CashMachine\Model\ChangeEnvelope;
 use App\CashMachine\Model\Currency;
 
@@ -23,7 +23,7 @@ interface CashMachineInterface
      * @param float $amount The amount of money to turn into change
      *
      * @return ChangeEnvelope The change envelope
-     * @throws CannotChange If the amount cannot be refund
+     * @throws CannotChangeException If the amount cannot be refund
      */
-    public function getChange(float $amount): ChangeEnvelope;
+    public function getChangeEnveloppe(float $amount): ChangeEnvelope;
 }
